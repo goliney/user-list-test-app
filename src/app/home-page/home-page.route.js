@@ -17,6 +17,11 @@
             controller: 'HomePageController',
             controllerAs: 'vm'
           }
+        },
+        resolve: {
+            users: ['User', function(User) {
+                return User.query().$promise;
+            }]
         }
       });
   }

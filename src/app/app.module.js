@@ -7,7 +7,6 @@
     'app.core',
 
     // features area
-    'app.auth',
     'app.user',
     'app.home-page'
   ]);

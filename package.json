@@ -1,25 +1,10 @@
 {
-  "name": "angular-boilerplate",
+  "name": "trinetix-test-task",
   "version": "0.0.1",
-  "description": "Boilerplate project for angularjs/bower/grunt",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/goliney/angular-boilerplate.git"
-  },
-  "keywords": [
-    "boilerplate",
-    "angularjs",
-    "grunt",
-    "bower"
-  ],
   "author": "Sergey Goliney",
-  "bugs": {
-    "url": "https://github.com/goliney/angular-boilerplate/issues"
-  },
-  "homepage": "https://github.com/goliney/angular-boilerplate",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-bump": "0.0.6",

@@ -10,7 +10,6 @@
     // ...
 
     /* 3rd Party modules */
-    'ui.router',
-    'LocalStorageModule'
+    'ui.router'
   ]);
 })();

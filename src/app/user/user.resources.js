@@ -5,15 +5,13 @@
     .module('app.user')
     .factory('User', UserResource);
 
-  UserResource.$inject = ['$resource', 'API_ROOT'];
+  UserResource.$inject = ['$resource'];
 
-  function UserResource($resource, API_ROOT) {
-    var User = $resource(API_ROOT + 'users/:_id', {}, {
-      getCurrent: {
-        url: 'assets/mock/user.json'
-      },
-      update: {
-        method: 'PUT'
+  function UserResource($resource) {
+    var User = $resource('', {}, {
+      query: {
+        url: 'assets/mock/users.json',
+        isArray: true
       }
     });
     return User;

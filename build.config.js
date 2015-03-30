@@ -68,16 +68,16 @@ module.exports = {
    */
   vendor_files: {
     js: [
-      'vendor/jquery/dist/jquery.min.js',
-      'vendor/lodash/lodash.min.js',
-      'vendor/angular/angular.min.js',
-      'vendor/angular-resource/angular-resource.min.js',
-      'vendor/angular-sanitize/angular-sanitize.min.js',
-      'vendor/angular-animate/angular-animate.min.js',
-      'vendor/angular-ui-router/release/angular-ui-router.min.js',
-      'vendor/angular-local-storage/dist/angular-local-storage.min.js'
+      'vendor/jquery/dist/jquery.js',
+      'vendor/angular/angular.js',
+      'vendor/angular-resource/angular-resource.js',
+      'vendor/angular-animate/angular-animate.js',
+      'vendor/angular-sanitize/angular-sanitize.js',
+      'vendor/angular-ui-router/release/angular-ui-router.js',
+      'vendor/angular-bootstrap/ui-bootstrap-tpls.js'
     ],
     css: [
+      'vendor/bootstrap/dist/css/bootstrap.min.css'
     ],
     assets: [
     ]
