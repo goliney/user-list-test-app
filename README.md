@@ -33,3 +33,18 @@ User {
     Age: int
 }
 ```
+
+##Installation
+```
+npm install
+bower install
+grunt
+```
+
+##Development
+```
+grunt watch
+```
+
+##Used sources
+https://github.com/goliney/angular-boilerplate
