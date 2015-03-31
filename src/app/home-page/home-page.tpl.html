@@ -9,16 +9,32 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Age</th>
+                        <th><input type="checkbox"/></th>
+                        <th>
+                            <a href="#" ng-click="vm.orderBy('FirstName')"> First Name </a>
+                            <span class="order-direction" ng-show="vm.order == 'FirstName'">^</span>
+                            <span class="order-direction" ng-show="vm.order == '-FirstName'">v</span>
+                        </th>
+                        <th>
+                            <a href="#" ng-click="vm.orderBy('LastName')"> Last Name </a>
+                            <span class="order-direction" ng-show="vm.order == 'LastName'">^</span>
+                            <span class="order-direction" ng-show="vm.order == '-LastName'">v</span>
+                        </th>
+                        <th>
+                            <a href="#" ng-click="vm.orderBy('Email')"> Email </a>
+                            <span class="order-direction" ng-show="vm.order == 'Email'">^</span>
+                            <span class="order-direction" ng-show="vm.order == '-Email'">v</span>
+                        </th>
+                        <th>
+                            <a href="#" ng-click="vm.orderBy('Age')"> Age </a>
+                            <span class="order-direction" ng-show="vm.order == 'Age'">^</span>
+                            <span class="order-direction" ng-show="vm.order == '-Age'">v</span>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="user in vm.users">
-                        <td>{{ user.id }}</td>
+                    <tr ng-repeat="user in vm.filteredUsers">
+                        <td><input type="checkbox"/></td>
                         <td>{{ user.FirstName }}</td>
                         <td>{{ user.LastName }}</td>
                         <td>{{ user.Email }}</td>
@@ -27,6 +43,9 @@
                     </tbody>
                 </table>
             </div>
+
+            <pagination total-items="vm.totalItems" ng-model="vm.currentPage" ng-change="vm.paginationChanged()"></pagination>
+
         </div>
     </div>
 
