@@ -28,6 +28,13 @@
 
     //search
     vm.search = {};
+    vm.ageRange = null;
+    vm.ageRanges = [
+      { min: 10, max: 20, name: '10-20' },
+      { min: 20, max: 30, name: '20-30' },
+      { min: 30, max: 40, name: '30-40' },
+      { min: 40, max: 999, name: '40+' }
+    ];
     vm.filterBy = filterBy;
 
     activate();
@@ -40,7 +47,8 @@
 
     function showUsers() {
       var filtered = $filter('filter')(vm.users, vm.search);
-      vm.usersFiltered = $filter('orderBy')(filtered, vm.order);
+      var filteredByAge = filterAgeRange(filtered, vm.ageRange);
+      vm.usersFiltered = $filter('orderBy')(filteredByAge, vm.order);
       paginate();
     }
 
@@ -64,8 +72,23 @@
     }
 
     function filterBy() {
+      // filters change
       vm.currentPage = 1;
       showUsers();
+    }
+
+    function filterAgeRange(items, ageRange) {
+      var result = [];
+      if (ageRange) {
+        angular.forEach(items, function(item) {
+          if (item.Age >= ageRange.min && item.Age <= ageRange.max) {
+            result.push(item);
+          }
+        });
+      } else {
+        result = items;
+      }
+      return result;
     }
   }
 })();
