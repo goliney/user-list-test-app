@@ -33,7 +33,28 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="user in vm.filteredUsers">
+                    <tr class="filters">
+                        <td></td>
+                        <td>
+                            <input type="text" ng-model="vm.search.FirstName" ng-change="vm.filterBy()"/>
+                        </td>
+                        <td>
+                            <input type="text" ng-model="vm.search.LastName" ng-change="vm.filterBy()"/>
+                        </td>
+                        <td>
+                            <input type="text" ng-model="vm.search.Email" ng-change="vm.filterBy()"/>
+                        </td>
+                        <td>
+                            <select>
+                                <option value="">All ages</option>
+                                <option value="10-20">10-20</option>
+                                <option value="20-30">20-30</option>
+                                <option value="30-40">30-40</option>
+                                <option value="40+">40+</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="user in vm.usersShown">
                         <td><input type="checkbox"/></td>
                         <td>{{ user.FirstName }}</td>
                         <td>{{ user.LastName }}</td>
@@ -44,7 +65,7 @@
                 </table>
             </div>
 
-            <pagination total-items="vm.totalItems" ng-model="vm.currentPage" ng-change="vm.paginationChanged()"></pagination>
+            <pagination total-items="vm.totalItems" ng-model="vm.currentPage" ng-change="vm.paginate()"></pagination>
 
         </div>
     </div>

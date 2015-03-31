@@ -11,29 +11,44 @@
     var vm = this;
 
     vm.users = users;
+    vm.usersFiltered = users;       // filtered and sorted users
+    vm.usersShown = [];             // users to show on page
 
     //pagination
+    var paginationBegin;
+    var paginationEnd;
     vm.currentPage = 1;
     vm.totalItems = 0;
     vm.itemsPerPage = 10;
-    vm.paginationChanged = paginationChanged;
 
     //order
-    vm.orderBy = orderBy;
     vm.order = 'id';
+    vm.orderBy = orderBy;
+
+    //search
+    vm.search = {};
+    vm.filterBy = filterBy;
+
     activate();
 
     //////////
 
     function activate() {
-      vm.totalItems = users.length;
-      paginationChanged();
+      showUsers();
     }
 
-    function paginationChanged() {
-      var begin = (vm.currentPage - 1) * vm.itemsPerPage;
-      var end = begin + vm.itemsPerPage;
-      vm.filteredUsers = vm.users.slice(begin, end);
+    function showUsers() {
+      var filtered = $filter('filter')(vm.users, vm.search);
+      vm.usersFiltered = $filter('orderBy')(filtered, vm.order);
+      paginate();
+    }
+
+    function paginate() {
+      paginationBegin = (vm.currentPage - 1) * vm.itemsPerPage;
+      paginationEnd = paginationBegin + vm.itemsPerPage;
+
+      vm.totalItems = vm.usersFiltered.length;
+      vm.usersShown = vm.usersFiltered.slice(paginationBegin, paginationEnd);
     }
 
     function orderBy(newOrder) {
@@ -43,9 +58,13 @@
         vm.order = newOrder;
       }
 
-      vm.users = $filter('orderBy')(vm.users, vm.order);
       vm.currentPage = 1;
-      vm.paginationChanged();
+      showUsers();
+    }
+
+    function filterBy() {
+      vm.currentPage = 1;
+      showUsers();
     }
   }
 })();
