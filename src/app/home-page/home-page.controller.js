@@ -20,6 +20,7 @@
     vm.currentPage = 1;
     vm.totalItems = 0;
     vm.itemsPerPage = 10;
+    vm.paginate = paginate;
 
     //order
     vm.order = 'id';
