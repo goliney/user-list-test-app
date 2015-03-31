@@ -37,6 +37,14 @@
     ];
     vm.filterBy = filterBy;
 
+    //selection
+    vm.selection = [];    //selected user ids
+
+    //operation
+    vm.remove = removeSelectedUsers;
+    vm.editInPlace = editInPlace;
+    vm.editInModal = editInModal;
+
     activate();
 
     //////////
@@ -89,6 +97,32 @@
         result = items;
       }
       return result;
+    }
+
+    // Operations on users
+
+    function removeSelectedUsers() {
+      if (!vm.selection.length) {
+        return;
+      }
+      angular.forEach(vm.selection, function(id) {
+        // in normal environment I would send delete requests and redraw the table
+        // but here I just find user and remove it from array
+        for (var i = vm.users.length - 1; i >= 0; i--) {
+          var user = vm.users[i];
+          if (vm.selection.indexOf(user.id) !== -1) {
+            vm.users.splice(i, 1);
+          }
+        }
+      });
+      showUsers();
+    }
+
+    function editInPlace(user) {
+
+    }
+    function editInModal(user) {
+
     }
   }
 })();
