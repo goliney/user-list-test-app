@@ -19,9 +19,13 @@
           }
         },
         resolve: {
-            users: ['User', function(User) {
-                return User.query().$promise;
-            }]
+          users: ['User', function(User) {
+            return User.query().$promise;
+          }],
+          // delay resolver delays page load to 5 secs
+          delay: ['$http', function($http) {
+            return $http.get('http://httpbin.org/delay/5');
+          }]
         }
       });
   }
