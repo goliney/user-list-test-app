@@ -10,6 +10,7 @@
   function HomePage(users) {
     var vm = this;
     vm.title = 'Home page';
+    vm.users = users;
 
     activate();
 
