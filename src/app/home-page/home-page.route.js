@@ -22,9 +22,14 @@
           users: ['User', function(User) {
             return User.query().$promise;
           }],
-          // delay resolver delays page load to 5 secs
-          delay: ['$http', function($http) {
-            return $http.get('http://httpbin.org/delay/5');
+          // delay resolver delays page load to 3 secs
+          delay: ['$q', function($q) {
+            var interval = 3000;
+            var deferred = $q.defer();
+            setTimeout(function() {
+              deferred.resolve();
+            }, interval);
+            return deferred.promise;
           }]
         }
       });
