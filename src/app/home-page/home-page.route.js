@@ -24,7 +24,7 @@
           }],
           // delay resolver delays page load to 3 secs
           delay: ['$q', function($q) {
-            var interval = 500;
+            var interval = 3000;
             var deferred = $q.defer();
             setTimeout(function() {
               deferred.resolve();

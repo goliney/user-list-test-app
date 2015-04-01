@@ -5,22 +5,26 @@
     .module('app.home-page')
     .controller('HomePageController', HomePage);
 
-  HomePage.$inject = ['users', '$filter', '$modal'];
+  HomePage.$inject = ['users', '$scope', '$filter', '$modal'];
 
-  function HomePage(users, $filter, $modal) {
+  function HomePage(users, $scope, $filter, $modal) {
     var vm = this;
 
     vm.users = users;
-    vm.usersFiltered = users;       // filtered and sorted users
-    vm.usersShown = [];             // users to show on page
+    vm.usersFiltered = users;           // filtered and sorted users
+    vm.usersShown = [];                 // users to show on page
 
     //pagination
     var paginationBegin;
     var paginationEnd;
+    var defaultItemsPerPage = 10;
+    var infiniteScrollIncrement = 7;   // used on infinite scroll
+    vm.paginationType = 'Classical';
     vm.currentPage = 1;
     vm.totalItems = 0;
-    vm.itemsPerPage = 10;
+    vm.itemsPerPage = defaultItemsPerPage;
     vm.paginate = paginate;
+    vm.infiniteScroll = infiniteScroll;
 
     //order
     vm.order = 'id';
@@ -51,6 +55,17 @@
 
     function activate() {
       showUsers();
+
+      $scope.$watch('vm.paginationType', function (newType) {
+        if (newType === 'Classical') {
+          vm.itemsPerPage = defaultItemsPerPage;
+          vm.currentPage = 1;
+          showUsers();
+        } else {
+          vm.currentPage = 1;
+          $scope.$emit('infiniteScroll.recheck');
+        }
+      });
     }
 
     function showUsers() {
@@ -99,6 +114,14 @@
       return result;
     }
 
+    function infiniteScroll() {
+      if (vm.paginationType !== 'Infinite' || vm.itemsPerPage > vm.users.length) {
+        return;
+      }
+      vm.itemsPerPage += infiniteScrollIncrement;
+      showUsers();
+    }
+
     // Operations on users
 
     function removeSelectedUsers() {
@@ -116,6 +139,7 @@
         }
       });
       showUsers();
+      $scope.$emit('infiniteScroll.recheck');
     }
 
     function editInPlace(user) {
@@ -126,6 +150,7 @@
         user._underEdition = true;
       }
     }
+
     function editInModal(user) {
       var modalInstance = $modal.open({
         templateUrl: 'user/modal-edit/modal.tpl.html',

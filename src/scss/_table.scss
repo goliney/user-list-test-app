@@ -1,3 +1,7 @@
+.table-responsive {
+  margin-top: 25px;
+}
+
 table {
 
   th, td {
@@ -33,18 +37,21 @@ table {
 
       input[type=text],
       input[type=email],
-      input[type=number] {
+      input[type=number],
+      .save-btn {
         display: none;
       }
 
       &.edit {
         input[type=text],
         input[type=email],
-        input[type=number] {
+        input[type=number],
+        .save-btn {
           display: inline-block;
         }
 
-        .text {
+        .text,
+        .edit-btn {
           display: none;
         }
       }

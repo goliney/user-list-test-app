@@ -1,10 +1,16 @@
-<div class="container">
+<div class="container" infinite-scroll="vm.infiniteScroll()">
     <div class="header">
         <h3 class="text-muted">User list</h3>
     </div>
 
     <div class="row">
         <div class="col-lg-12 opearations-menu">
+            <div class="pull-left">
+                <div class="btn-group">
+                    <label class="btn btn-default" ng-model="vm.paginationType" btn-radio="'Classical'" uncheckable>Classical pagination</label>
+                    <label class="btn btn-default" ng-model="vm.paginationType" btn-radio="'Infinite'" uncheckable>Infinite scroll</label>
+                </div>
+            </div>
             <div class="pull-right">
                 <button class="btn btn-danger" ng-disabled="!vm.selection.length" ng-click="vm.remove()">Remove</button>
             </div>
@@ -79,7 +85,10 @@
                             <input type="number" min="10" max="90" ng-model="user.Age"/>
                         </td>
                         <td>
-                            <button class="btn btn-default btn-xs" ng-click="vm.editInPlace(user)">Edit</button>
+                            <button class="btn btn-default btn-xs" ng-click="vm.editInPlace(user)">
+                                <span class="edit-btn">Edit</span>
+                                <span class="save-btn">Ok</span>
+                            </button>
                             <button class="btn btn-default btn-xs" ng-click="vm.editInModal(user)">Modal</button>
                         </td>
                     </tr>
@@ -87,8 +96,9 @@
                 </table>
             </div>
 
-            <pagination total-items="vm.totalItems" ng-model="vm.currentPage" ng-change="vm.paginate()"></pagination>
-
+            <div ng-show="vm.paginationType == 'Classical'">
+                <pagination total-items="vm.totalItems" ng-model="vm.currentPage" ng-change="vm.paginate()"></pagination>
+            </div>
         </div>
     </div>
 
