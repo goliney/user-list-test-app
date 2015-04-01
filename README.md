@@ -1,6 +1,3 @@
-# Trinetix test task
----
-
 ##Technologies
 
 1.	AngularJS
