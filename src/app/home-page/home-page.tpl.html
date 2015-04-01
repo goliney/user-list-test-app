@@ -60,15 +60,27 @@
                         </td>
                         <td></td>
                     </tr>
-                    <tr ng-repeat="user in vm.usersShown">
+                    <tr ng-repeat="user in vm.usersShown" class="user" ng-class="{'edit': user._underEdition === true}">
                         <td><input type="checkbox" ng-model="selectedHash[user.id]"/></td>
-                        <td>{{ user.FirstName }}</td>
-                        <td>{{ user.LastName }}</td>
-                        <td>{{ user.Email }}</td>
-                        <td>{{ user.Age }}</td>
                         <td>
-                            <button class="btn btn-default btn-sm" ng-click="vm.editInPlace(user)">Edit</button>
-                            <button class="btn btn-default btn-sm" ng-click="vm.editInModal(user)">Modal</button>
+                            <span class="text">{{ user.FirstName }}</span>
+                            <input type="text" ng-model="user.FirstName"/>
+                        </td>
+                        <td>
+                            <span class="text">{{ user.LastName }}</span>
+                            <input type="text" ng-model="user.LastName"/>
+                        </td>
+                        <td>
+                            <span class="text">{{ user.Email }}</span>
+                            <input type="email" ng-model="user.Email"/>
+                        </td>
+                        <td>
+                            <span class="text">{{ user.Age }}</span>
+                            <input type="number" min="10" max="90" ng-model="user.Age"/>
+                        </td>
+                        <td>
+                            <button class="btn btn-default btn-xs" ng-click="vm.editInPlace(user)">Edit</button>
+                            <button class="btn btn-default btn-xs" ng-click="vm.editInModal(user)">Modal</button>
                         </td>
                     </tr>
                     </tbody>

@@ -5,9 +5,9 @@
     .module('app.home-page')
     .controller('HomePageController', HomePage);
 
-  HomePage.$inject = ['users', '$filter'];
+  HomePage.$inject = ['users', '$filter', '$modal'];
 
-  function HomePage(users, $filter) {
+  function HomePage(users, $filter, $modal) {
     var vm = this;
 
     vm.users = users;
@@ -119,10 +119,33 @@
     }
 
     function editInPlace(user) {
-
+      if (user._underEdition === true) {
+        delete user._underEdition;
+        showUsers();
+      } else {
+        user._underEdition = true;
+      }
     }
     function editInModal(user) {
+      var modalInstance = $modal.open({
+        templateUrl: 'user/modal-edit/modal.tpl.html',
+        controller: 'UserModelEditController',
+        size: '',
+        resolve: {
+          userInstance: function () {
+            return angular.copy(user);
+          }
+        }
+      });
 
+      modalInstance.result.then(function (editedUser) {
+        // Normaly I would invoke .$save(), but we have no backend
+        // So just change object and redraw
+        angular.extend(user, editedUser);
+        showUsers();
+      }, function () {
+        // cancel, do nothing
+      });
     }
   }
 })();

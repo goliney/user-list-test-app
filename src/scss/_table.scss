@@ -8,8 +8,13 @@ table {
     }
   }
 
-  tr.filters {
-    input[type="text"], select {
+  tr {
+
+
+    input[type=text],
+    input[type=email],
+    input[type=number],
+    select {
       width: 100%;
       box-sizing: border-box;
       -webkit-box-sizing:border-box;
@@ -17,8 +22,32 @@ table {
       outline: none;
     }
 
-    select {
-      padding: 3px;
+    &.filters {
+
+      select {
+        padding: 3px;
+      }
+    }
+
+    &.user {
+
+      input[type=text],
+      input[type=email],
+      input[type=number] {
+        display: none;
+      }
+
+      &.edit {
+        input[type=text],
+        input[type=email],
+        input[type=number] {
+          display: inline-block;
+        }
+
+        .text {
+          display: none;
+        }
+      }
     }
   }
 }
