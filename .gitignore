@@ -2,7 +2,7 @@
 *~
 bin/
 node_modules/
-vendor/
+/vendor
 npm-debug.log
 
 .idea/
